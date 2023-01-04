@@ -52,14 +52,14 @@ emotion_model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.0001,
 emotion_model_info = emotion_model.fit_generator(
         train_generator,
         steps_per_epoch=28709 // 64,
-        epochs=50,
+        epochs=1,
         validation_data=validation_generator,
         validation_steps=7178 // 64)
 
-# save model structure in jason file
-model_json = emotion_model.to_json()
-with open("emotion_model.json", "w") as json_file:
-    json_file.write(model_json)
-
-# save trained model weight in .h5 file
-emotion_model.save_weights('emotion_model.h5')
+# # save model structure in jason file
+# model_json = emotion_model.to_json()
+# with open("emotion_model.json", "w") as json_file:
+#     json_file.write(model_json)
+#
+# # save trained model weight in .h5 file
+# emotion_model.save_weights('emotion_model.h5')

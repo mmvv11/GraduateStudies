@@ -20,7 +20,7 @@ print("Loaded model from disk")
 
 # pass here your video path
 # you may download one from here : https://www.pexels.com/video/three-girls-laughing-5273028/
-cap = cv2.VideoCapture("C:\\JustDoIt\\ML\\Sample_videos\\emotion_sample6.mp4")
+cap = cv2.VideoCapture("C:\\tech\\Study\\FER\\data\\pexels-gabby-k-5273028.mp4")
 
 while True:
     # Find haar cascade to draw bounding box around face
@@ -33,6 +33,7 @@ while True:
 
     # detect faces available on camera
     num_faces = face_detector.detectMultiScale(gray_frame, scaleFactor=1.3, minNeighbors=5)
+    print(num_faces)
 
     # take each face available on the camera and Preprocess it
     for (x, y, w, h) in num_faces:
