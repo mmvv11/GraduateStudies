@@ -21,7 +21,10 @@ print("Loaded model from disk")
 # pass here your video path
 # you may download one from here : https://www.pexels.com/video/three-girls-laughing-5273028/
 # read image file
-img = cv2.imread("C:\\tech\\Study\\FER\\data\\man-g4474f6873_1920.jpg")
+# img = cv2.imread("C:\\tech\\Study\\FER\\data\\man-g4474f6873_1920.jpg")
+# img = cv2.imread("C:\\tech\\Study\\FER\\data\\woman-g0f7d9994a_1920.jpg")
+# img = cv2.imread("C:\\tech\\Study\\FER\\data\\sad-g878ea9d68_1920.jpg")
+img = cv2.imread("C:\\tech\\Study\\FER\\data\\buddhists-gb3fb01532_1920.jpg")
 
 
 # while True:
@@ -50,7 +53,7 @@ for (x, y, w, h) in num_faces:
     maxindex = int(np.argmax(emotion_prediction))
     cv2.putText(frame, emotion_dict[maxindex], (x+5, y-20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
 
-cv2.imwrite('res.jpg', frame)
+# cv2.imwrite('res.jpg', frame)
 cv2.imshow('Emotion Detection', frame)
 cv2.waitKey(0)
     # if cv2.waitKey(1) & 0xFF == ord('q'):
