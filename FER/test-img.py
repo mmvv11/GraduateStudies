@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from keras.models import model_from_json
 
-
 emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
 
 # load json and create model
@@ -16,7 +15,7 @@ emotion_model.load_weights("model/emotion_model.h5")
 print("Loaded model from disk")
 
 # start the webcam feed
-#cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
 # pass here your video path
 # you may download one from here : https://www.pexels.com/video/three-girls-laughing-5273028/
@@ -24,8 +23,7 @@ print("Loaded model from disk")
 # img = cv2.imread("C:\\tech\\Study\\FER\\data\\man-g4474f6873_1920.jpg")
 # img = cv2.imread("C:\\tech\\Study\\FER\\data\\woman-g0f7d9994a_1920.jpg")
 # img = cv2.imread("C:\\tech\\Study\\FER\\data\\sad-g878ea9d68_1920.jpg")
-img = cv2.imread("C:\\tech\\Study\\FER\\data\\buddhists-gb3fb01532_1920.jpg")
-
+img = cv2.imread("C:\\tech\\Study\\FER\\data\\KakaoTalk_20230105_160716426.jpg")
 
 # while True:
 # Find haar cascade to draw bounding box around face
@@ -43,21 +41,28 @@ print(f"num_faces: {num_faces}")
 
 # take each face available on the camera and Preprocess it
 for (x, y, w, h) in num_faces:
-    cv2.rectangle(frame, (x, y-50), (x+w, y+h+10), (0, 255, 0), 4)
+    cv2.rectangle(frame, (x, y - 50), (x + w, y + h + 10), (0, 255, 0), 4)
     roi_gray_frame = gray_frame[y:y + h, x:x + w]
     cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray_frame, (48, 48)), -1), 0)
 
     # predict the emotions
     emotion_prediction = emotion_model.predict(cropped_img)
     print(f"emotion_prediction: {emotion_prediction}")
-    maxindex = int(np.argmax(emotion_prediction))
-    cv2.putText(frame, emotion_dict[maxindex], (x+5, y-20), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+    text = ""
+
+    for i, v in enumerate(emotion_prediction[0]):
+        # v = v * 100
+        text += f"{emotion_dict[i]}:{v}" + "\n"
+
+    # maxindex = int(np.argmax(emotion_prediction))
+
+    cv2.putText(frame, text, (x - 5, y - 20), cv2.FONT_HERSHEY_SIMPLEX, .8, (255, 0, 0), 2, cv2.LINE_AA)
 
 # cv2.imwrite('res.jpg', frame)
 cv2.imshow('Emotion Detection', frame)
 cv2.waitKey(0)
-    # if cv2.waitKey(1) & 0xFF == ord('q'):
-    #     break
+# if cv2.waitKey(1) & 0xFF == ord('q'):
+#     break
 
 # img.release()
 # cv2.destroyAllWindows()
