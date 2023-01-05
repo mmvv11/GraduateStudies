@@ -27,7 +27,7 @@ class MovieLens:
         ratingsDataset = 0
         
         ratings = pd.read_csv(self.ratingsPath, encoding='latin-1')
-        print("Raw ratings data:")
+        print("Raw ratings testdata:")
         print(ratings.head())
         print(ratings.shape)
         
@@ -46,7 +46,7 @@ class MovieLens:
         
         filtered = combined.loc[combined['outlier'] == False]
         filtered = filtered.drop(columns=['outlier', 'timestamp'])
-        print("Filtered ratings data:")
+        print("Filtered ratings testdata:")
         print (filtered.head())
         print (filtered.shape)
         
@@ -70,7 +70,7 @@ class MovieLens:
     def getNewMovies(self):
         newMovies = []
         years = self.getYears()
-        # What's the newest year in our data?
+        # What's the newest year in our testdata?
         latestYear = max(years.values())
         print ("Newest year is ", latestYear)
         for movieID, year in years.items():

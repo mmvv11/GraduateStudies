@@ -42,7 +42,7 @@ class MovieLens:
     def getNewMovies(self):
         newMovies = []
         years = self.getYears()
-        # What's the newest year in our data?
+        # What's the newest year in our testdata?
         latestYear = max(years.values())
         print ("Newest year is ", latestYear)
         for movieID, year in years.items():

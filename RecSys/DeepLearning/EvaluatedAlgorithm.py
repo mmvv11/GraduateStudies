@@ -44,7 +44,7 @@ class EvaluatedAlgorithm:
         
             #Evaluate properties of recommendations on full training set
             if (verbose):
-                print("Computing recommendations with full data set...")
+                print("Computing recommendations with full testdata set...")
             self.algorithm.fit(evaluationData.GetFullTrainSet())
             allPredictions = self.algorithm.test(evaluationData.GetFullAntiTestSet())
             topNPredicted = RecommenderMetrics.GetTopN(allPredictions, n)

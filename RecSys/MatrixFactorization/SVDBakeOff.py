@@ -24,7 +24,7 @@ def LoadMovieLensData():
 np.random.seed(0)
 random.seed(0)
 
-# Load up common data set for the recommender algorithms
+# Load up common testdata set for the recommender algorithms
 (ml, evaluationData, rankings) = LoadMovieLensData()
 
 # Construct an Evaluator to, you know, evaluate them

@@ -14,7 +14,7 @@ from operator import itemgetter
 testSubject = '85'
 k = 10
 
-# Load our data set and compute the user similarity matrix
+# Load our testdata set and compute the user similarity matrix
 ml = MovieLens()
 data = ml.loadMovieLensLatestSmall()
 

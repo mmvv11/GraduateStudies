@@ -38,7 +38,7 @@ simsMatrix = model.compute_similarities()
 
 leftOutTestSet = evalData.GetLOOCVTestSet()
 
-# Get new movies that need data
+# Get new movies that need testdata
 newMovies = ml.getNewMovies()
 explorationSlot = 9
 

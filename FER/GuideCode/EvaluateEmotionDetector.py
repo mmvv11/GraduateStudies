@@ -18,18 +18,18 @@ emotion_model = model_from_json(loaded_model_json)
 emotion_model.load_weights("model/emotion_model.h5")
 print("Loaded model from disk")
 
-# Initialize image data generator with rescaling
+# Initialize image testdata generator with rescaling
 test_data_gen = ImageDataGenerator(rescale=1./255)
 
 # Preprocess all test images
 test_generator = test_data_gen.flow_from_directory(
-        'data/test',
+        'testdata/test',
         target_size=(48, 48),
         batch_size=64,
         color_mode="grayscale",
         class_mode='categorical')
 
-# do prediction on test data
+# do prediction on test testdata
 predictions = emotion_model.predict_generator(test_generator)
 
 # see predictions

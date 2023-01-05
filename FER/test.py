@@ -20,7 +20,7 @@ print("Loaded model from disk")
 
 # pass here your video path
 # you may download one from here : https://www.pexels.com/video/three-girls-laughing-5273028/
-cap = cv2.VideoCapture("C:\\tech\\Study\\FER\\data\\pexels-gabby-k-5273028.mp4")
+cap = cv2.VideoCapture("C:\\tech\\Study\\FER\\testdata\\pexels-gabby-k-5273028.mp4")
 
 while True:
     # Find haar cascade to draw bounding box around face
