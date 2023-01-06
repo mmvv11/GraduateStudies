@@ -26,6 +26,7 @@ img = cv2.imread("testdata/KakaoTalk_20230105_160716426.jpg")
 
 frame = img
 frame = cv2.resize(frame, (1280, 720))
+# frame = cv2.resize(frame, (720, 1280))
 face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
 gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -53,7 +54,7 @@ for (x, y, w, h) in num_faces:
         ny = y0 + i*dy
         cv2.putText(frame, line, (x+w+5, ny), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
 
-# cv2.imwrite('res.jpg', frame)
+cv2.imwrite('res.jpg', frame)
 cv2.imshow('Emotion Detection', frame)
 cv2.waitKey(0)
 

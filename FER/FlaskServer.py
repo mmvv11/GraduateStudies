@@ -1,15 +1,22 @@
 # https://howtolivelikehuman.tistory.com/118
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import cv2
 import numpy as np
 from keras.models import model_from_json
+from io import BytesIO
 
 app = Flask(__name__)
 
 
 def get_res(file):
+
     # TODO: 모델 결과 돌려주기
+
+    img = file.read()
+    img =  cv2.imdecode(np.fromstring(img, np.uint8), cv2.IMREAD_UNCHANGED)
+
+    ## 기존 코드
     emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutral", 5: "Sad", 6: "Surprised"}
 
     # load json and create model
@@ -20,7 +27,7 @@ def get_res(file):
 
     # load weights into new model
     emotion_model.load_weights("model/emotion_model.h5")
-    img = cv2.imread(file)
+    # img = cv2.imread(file)
     frame = img
     frame = cv2.resize(frame, (1280, 720))
     face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
@@ -49,7 +56,10 @@ def get_res(file):
             ny = y0 + i * dy
             cv2.putText(frame, line, (x + w + 5, ny), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
 
-    return frame
+    _, result = cv2.imencode('.jpg', frame)
+    # ndarray -> 파일 객체로 형변환
+    result = BytesIO(result)
+    return result
 
 
 @app.route("/")
@@ -57,13 +67,17 @@ def main():
     # templates 폴더 안에서 찾음
     return render_template('index.html')
 
+
+
 @app.route('/prediction', methods=['POST'])
 def predict():
     try:
-        file = request.files['file']
-        res = get_res(file)
-        return res
-    except:
+        file = request.files['image']
+        result = get_res(file)
+        print(type(result))
+        return send_file(result, mimetype='image/jpeg')
+    except Exception as e:
+        print(e)
         return render_template('error.html')
 
 if __name__ == "__main__":

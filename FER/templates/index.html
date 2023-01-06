@@ -7,18 +7,17 @@
 </head>
 <body>
 
-    <form action="http://localhost:5000/prediction"
-          method="post"
-          enctype="multipart/form-data">
-        <input type="file" name="file" id="file" />
+    <form id="form">
+        <input type="file" name="file" id="file" accept="image/*" />
         <input type="submit" />
         <div id="preview"></div>
 
     </form>
 
     <script>
-        var upload = document.querySelector('#file');
-        var upload2 = document.querySelector('#preview');
+        var imageFileInput = document.querySelector('#file');
+        var resultDiv = document.querySelector('#preview');
+        const form = document.getElementById('form');
 
         var reader = new FileReader();
         reader.onload = (function () {
@@ -31,7 +30,8 @@
         	}
         })()
 
-        upload.addEventListener('change',function (e) {
+        imageFileInput.addEventListener('change',function (e) {
+            image.innerHTML = ""
         	var get_file = e.target.files;
 
         	if(get_file){
@@ -39,8 +39,24 @@
        		 }
         	image.style.maxWidth='500px';
         	image.style.maxHeight='500px';
-        	preview.appendChild(image);
+        	resultDiv.appendChild(image);
         })
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const imageFile = imageFileInput.files[0];
+            const formData = new FormData();
+            formData.append('image', imageFile);
+            console.log(formData)
+
+            const response = await fetch('/prediction', {
+                method: 'POST',
+                body: formData
+            });
+            console.log(response)
+            const imageUrl = URL.createObjectURL(await response.blob());
+            resultDiv.innerHTML = `<img src="${imageUrl}">`;
+        });
     </script>
 </body>
 </html>
