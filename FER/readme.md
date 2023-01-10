@@ -6,5 +6,5 @@ https://www.kaggle.com/datasets/msambare/fer2013
 
 의존성 정리  
 ```text
-flask
+flask, flask_cors
 ```
