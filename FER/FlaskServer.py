@@ -5,9 +5,12 @@ import cv2
 import numpy as np
 from keras.models import model_from_json
 from io import BytesIO
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
-
+CORS(app)
 
 def get_res(file):
 
