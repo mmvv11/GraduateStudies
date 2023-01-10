@@ -57,7 +57,8 @@ def get_res(file):
         y0, dy = 50, 25
         for i, line in enumerate(text.split('\n')):
             ny = y0 + i * dy
-            cv2.putText(frame, line, (x + w + 5, ny), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
+            # cv2.rectangle(frame, (x + w + 5, ny), (x+10, ny+10), (0,0,0), -1)
+            cv2.putText(frame, line, (x + w + 5, ny), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2, cv2.LINE_AA)
 
     _, result = cv2.imencode('.jpg', frame)
     # ndarray -> 파일 객체로 형변환
