@@ -4,11 +4,19 @@ https://github.com/datamagic2020/Emotion_detection_with_CNN
 FER2013 Dataset  
 https://www.kaggle.com/datasets/msambare/fer2013
 
+## TODO
+```
+* 경고 메시지 제거
+* 모델 훈련 코드 업데이트
+    * 드롭아웃, 조기종료 등.. 로직 추가
+    * 최적 모델 추출 로직 작성하기
+```
+
 ## Face Emotions Recognition
-###before
-![before](./testdata/woman-g0f7d9994a_1920.jpg)
-###after
-![after](./testdata/after.png)
+### before
+![before](./testdata/woman-g0f7d9994a_1920.jpg)  
+### after  
+![after](./testdata/after.png)  
 
 ### 프로젝트 구조
 ㄴdataset: FER2013 Dataset, gitignore 등록되어 있음. 위 링크를 통해 직접 설치  
