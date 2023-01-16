@@ -54,7 +54,7 @@ for (x, y, w, h) in num_faces:
         ny = y0 + i*dy
         cv2.putText(frame, line, (x+w+5, ny), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
 
-cv2.imwrite('res.jpg', frame)
+# cv2.imwrite('res.jpg', frame)
 cv2.imshow('Emotion Detection', frame)
 cv2.waitKey(0)
 
