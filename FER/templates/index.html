@@ -48,7 +48,7 @@
             const formData = new FormData();
             formData.append('image', imageFile);
 
-            const response = await fetch('http://localhost:5000/prediction', {
+            const response = await fetch('http://localhost:5000/analysed-emotions', {
                 method: 'POST',
                 body: formData
             });
