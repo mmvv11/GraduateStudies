@@ -4,7 +4,7 @@ Created on Wed May  9 10:10:04 2018
 
 @author: Frank
 """
-
+import pandas as pd
 from MovieLens import MovieLens
 from surprise import KNNBasic
 import heapq
@@ -17,6 +17,8 @@ k = 10
 # Load our testdata set and compute the user similarity matrix
 ml = MovieLens()
 data = ml.loadMovieLensLatestSmall()
+a = pd.read_csv("../ml-latest-small/ratings.csv")
+print(a.head())
 
 trainSet = data.build_full_trainset()
 
@@ -54,7 +56,7 @@ for similarUser in kNeighbors:
     for rating in theirRatings:
         candidates[rating[0]] += (rating[1] / 5.0) * userSimilarityScore
 
-print(f"candidates: {candidates}")
+# print(f"candidates: {candidates}")
 # Build a dictionary of stuff the user has already seen
 watched = {}
 for itemID, rating in trainSet.ur[testUserInnerID]:
