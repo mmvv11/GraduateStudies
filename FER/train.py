@@ -1,5 +1,6 @@
 # import required packages
 import cv2
+import keras.utils
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten
 from keras.optimizers import Adam
@@ -43,6 +44,8 @@ emotion_model.add(Flatten())
 emotion_model.add(Dense(1024, activation='relu'))
 emotion_model.add(Dropout(0.5))
 emotion_model.add(Dense(7, activation='softmax'))
+
+keras.utils.plot_model(emotion_model, show_shapes=True)
 
 cv2.ocl.setUseOpenCL(False)
 
